@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+<style>
+body{
+    display: grid;
+    place-content: center;
+    height:100dvh;
+    background: url("https://picsum.photos/1980/1280") fixed no-repeat;
+    background-size: cover;
+}
+form {
+    padding: 1em;
+    background: rgba(0,0,0,.4);
+    border-radius: 1em;
+    border: 1px solid gold;
+    box-shadow: 0 0 15px black;
+    backdrop-filter: blur(15px);
+    color: white;
+    width: 60dvw;
+    text-align: center;
+}
+label, input{
+    display: block;
+    margin: 1em auto;
+}
+.checkbox{
+    display: flex;
+    justify-content: space-around;
+    width: 15%;
+    margin: auto;
+}
+</style>
+    <form method="post" action="/login">
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        {% if app.user %}
+            <div class="mb-3">
+                Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+            </div>
+        {% endif %}
+
+        <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
+        <label for="username">Email</label>
+        <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
+        <label for="password">Mot de Passe</label>
+        <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
+
+        <input type="hidden" name="_csrf_token"
+               value="{{ csrf_token('authenticate') }}"
+        >
+
+        {#
+            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+            See https://symfony.com/doc/current/security/remember_me.html
+        #}
+
+            <div class="checkbox mb-3">
+                <input type="checkbox" name="_remember_me" id="_remember_me">
+                <label for="_remember_me">Rester connecté</label>
+            </div>
+
+        <button class="btn btn-lg btn-primary" type="submit">
+            Connexion
+        </button>
+    </form>
+    <div class="monitor">
+        {{ dump(app.user) }}
+        {{ dump(error) }}
+    </div>
+{% endblock %}

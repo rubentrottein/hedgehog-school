@@ -1,0 +1,34 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+{#  -- Ici les feuilles de styles de mon thème --   #}
+    <link rel="stylesheet" href="{{ asset('styles/app.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+{#  -- Ici les scripts de mon thème --   #}
+<script src="{{ asset('assets/app.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+
+<!-- header-area -->
+{% include 'components/header.html.twig' %}
+    <img class="banner" src="https://picsum.photos/1980/300" alt="Bannière d'illustration"/>
+<!-- header-area-end -->
+
+
+<!-- main-area -->
+<main>
+    {# TODO : messages Flash
+        {% include 'components/_flash.html.twig' %}
+    #}
+    {% block content %}{% endblock %}
+</main>
+<!-- main-area-end -->
+
+<!-- footer-area -->
+{% include 'components/footer.html.twig' %}
+<!-- footer-area-end -->
+
+{% endblock %}

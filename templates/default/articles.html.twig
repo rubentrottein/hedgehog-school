@@ -1,0 +1,26 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+        <section id="home">
+                <h2 class="text-secondary text-center">Liste des Articles</h2>
+        </section>
+        <section id="chapterContent">
+                <h2>Tab navigation</h2>
+                {% if not app.user %}
+                        <p>Connectez vous pour accéder aux articles</p>
+                        <div>
+                                <a href="/login" type="button">Connexion</a>
+                                <a href="/register" type="button">Inscription</a>
+                        </div>
+                {% else %}
+                        <ul>
+                                {% for article in articles %}
+                                        <figure>
+                                                <img src="{{ article.image }}" alt="Illustration" />
+                                                <h4> {{ article.title }} </h4>
+                                        </figure>
+                                {% endfor %}
+                        </ul>
+                {% endif %}
+        </section>
+{% endblock %}
