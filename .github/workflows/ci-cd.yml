@@ -1,5 +1,4 @@
 name: CI/CD Hedgehog School Symfony to OVH FTP
-
 on:
   push:
     branches: [ "main" ]
@@ -12,7 +11,7 @@ jobs:
     
     - name: Prepare Symfony
       run: |
-        composer install --no-dev --optimize-autoloader --ignore-platform-reqs
+        composer install --no-dev --optimize-autoloader --no-scripts
         php bin/console cache:clear --env=prod
     
     - name: Deploy via FTP
