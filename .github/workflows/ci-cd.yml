@@ -14,7 +14,7 @@ jobs:
       run: |
         composer self-update
         composer clear-cache
-        composer install --no-dev --optimize-autoloader --no-scripts --ignore-platform-reqs
+        composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --no-scripts --ignore-platform-reqs
         php bin/console cache:clear --env=prod
     
     - name: Deploy via FTP
