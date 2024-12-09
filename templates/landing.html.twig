@@ -1,81 +1,60 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UI elements</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/home.css">
-</head>
-<body>
-<header>
-    <h1>🦔 Hedgehog School 🦔</h1>
-    <nav>
-        <a href="#home">Home</a>
-        <a href="articles.html">Articles</a>
-        <a href="#profile">Profil</a>
-        <a href="#connexion" class="connexion">Connexion</a>
-    </nav>
-</header>
-<video src="media/1.webm" autoplay muted loop></video>
-<main>
-    <section id="hero">
-        <h1>Des tutos et cours pour tout</h1>
-        <article>
-            <p>Apprendre</p>
-            <p>Savoir</p>
-            <p>Transmettre</p>
-        </article>
-        <button>S'inscrire</button>
-        <a href="#search">Chercher un cours</a>
-    </section>
-    <section>
-        <h2>Nos derniers cours</h2>
-        <article>
-            <h3>Slider</h3>
-            <aside id="slider">
-                <a href="#2">
-                    <img id='1' src="https://picsum.photos/id/18/1980/1280" alt="Image d'illustration">
-                    <h4>Titre du cours</h4>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa ex, obcaecati saepe consectetur, illo dolorem iste numquam doloremque maiores beatae pariatur voluptatem libero consequuntur inventore.</p>
-                </a>
-                <a href="#3">
-                    <img id='2' src="https://picsum.photos/id/111/1980/1280" alt="Image d'illustration">
-                    <h4>Titre du cours</h4>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa ex, obcaecati saepe consectetur, illo dolorem iste numquam doloremque maiores beatae pariatur voluptatem libero consequuntur inventore.</p>
-                </a>
-                <a href="#4">
-                    <img id='3' src="https://picsum.photos/id/213/1980/1280" alt="Image d'illustration">
-                    <h4>Titre du cours</h4>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa ex, obcaecati saepe consectetur, illo dolorem iste numquam doloremque maiores beatae pariatur voluptatem libero consequuntur inventore.</p>
-                </a>
-                <a href="#1">
-                    <img id='4' src="https://picsum.photos/id/33/1980/1280" alt="Image d'illustration">
-                    <h4>Titre du cours</h4>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa ex, obcaecati saepe consectetur, illo dolorem iste numquam doloremque maiores beatae pariatur voluptatem libero consequuntur inventore.</p>
-                </a>
-            </aside>
-        </article>
-    </section>
-</main>
-<section class="modal">
-    <article id="modalContent">
-        <a href="#" class="connexion close">X</a>
-        <h2>Connexion</h2>
-        <form action="">
-            <label for="email">email
-                <input type="text" name="email">
-            </label>
-            <label for="password">password
-                <input type="password" name="password">
-            </label>
-            <input type="submit" value="Connexion">
-            <a href="#" id="registerLink">Pas encore inscrit? s'inscrire ici</a>
-        </form>
-    </article>
-</section>
-<script>
+{% extends 'base.html.twig' %}
 
-</script>
-</body>
-</html>
+{% block title %}Hedgehog School{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{asset('assets/styles/app.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/styles/home.css')}}">
+{% endblock %}
+{% block final_javascripts %}
+    <script src="{{ asset('assets/scripts/bgVideoChanger.js') }}" defer></script>
+{% endblock %}
+{% block bgvideo %}
+    <video autoplay muted loop>
+        <source src="{{ asset('media/1399970531860.webm') }}" type="video/webm">
+        <source src="{{ asset('media/bg.webm') }}" type="video/webm">
+        Votre navigateur ne supporte pas les vidéos HTML5.
+    </video>
+{% endblock %}
+{% block banner %}{% endblock %}
+{% block content %}
+    <section id="hero">
+        <article>
+            <p class="edu-font">Apprendre</p>
+            <p class="edu-font">Savoir</p>
+            <p class="edu-font">Transmettre</p>
+        </article>
+        <article class="buttons">
+            <a type="button" href="{{ path('app_register') }}">S'inscrire</a>
+            <a type="button" href="{{ path('app_login') }}">Se connecter</a>
+        </article>
+        <a href="#slider">Chercher un cours</a>
+    </section>
+    <main>
+        <section class="accordion">
+            <h2 class="trigger">Nos derniers cours</h2>
+            <form action="{{ path('default_articles') }}">
+                <input type="search" name="" id="search" placeholder="Chercher un cours">
+                <input type="submit" value="Chercher">
+            </form>
+            <aside id="slider">
+                {% for article in articlesList %}{# articlesList|slice(0,3) #}
+                    {% if(loop.index >= listLength) %}
+                    <a href="#1" id="{{ loop.index }}" >
+                        <img src="{{ article.image }}" alt="{{ article.title }}">
+                        <h4>{{ article.title }}</h4>
+                        {# <p>{{ article.intro|raw }}</p> #}
+                    </a>
+                    {% else %}
+                    <a href="#{{ loop.index+1 }}">
+                        <img id='{{ loop.index }}' src="{{ article.image }}" alt="{{ article.title }}">
+                        <h4>{{ article.title }}</h4>
+                        <p>{{ article.intro|raw }}</p>
+                    </a>
+                    {% endif %}
+                {% endfor %}
+            </aside>
+            <article class="content">
+            </article>
+        </section>
+    </main>
+{% endblock %}

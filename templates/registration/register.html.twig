@@ -1,23 +1,24 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
 {% block title %}Register{% endblock %}
+{% block final_stylesheets %}
+    <link rel="stylesheet" href="{{ asset("assets/styles/form.css") }}">
+{% endblock %}
 
-{% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
+{% block content %}
 
-    <h1>Register</h1>
+        <h1>Register</h1>
+        <article class="form-container">
+            {{ form_errors(form) }}
 
-    {{ form_errors(registrationForm) }}
+            {{ form_start(form) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.plainPassword, {
+                    label: 'Password'
+                }) }}
+                {{ form_row(form.agreeTerms) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+                <button type="submit" class="btn">Register</button>
+            {{ form_end(form) }}
+        </article>
 {% endblock %}

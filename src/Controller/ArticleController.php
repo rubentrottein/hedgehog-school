@@ -34,7 +34,7 @@ class ArticleController extends AbstractController
     public function articles(Request $request): Response
     {
         try {
-            $articles = file_get_contents('http://localhost:3999/api/school/articles');
+            $articles = file_get_contents('https://school-api-omega.vercel.app/api/school/articles');
             $articlesList = json_decode($articles, true);
             $lastArticle = end($articlesList);
             return $this->render("default/articles.html.twig", ['articles' => $articlesList, 'lastArticle' => $lastArticle]);
