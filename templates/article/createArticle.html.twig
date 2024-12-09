@@ -1,0 +1,134 @@
+{% extends 'layout.html.twig' %}
+{% block final_stylesheets %}
+    <link rel="stylesheet" href="{{ asset("assets/styles/login.css") }}">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
+    <style>
+        .chapter-fields {
+            border: 1px solid #ddd;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            background-color: #f8f9fa;
+        }
+
+        .chapter-header {
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .chapter-fields input,
+        .chapter-fields textarea {
+            width: 100%;
+            margin-bottom: 0.5rem;
+        }
+
+        #add-chapter {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .delete-chapter {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+        }
+    </style>
+{% endblock %}
+{% block final_javascripts %}
+    <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let index = 0;
+            const addButton = document.getElementById('add-chapter');
+            const chaptersContainer = document.getElementById('chapters-list');
+
+            function createChapterFields() {
+                const chapterDiv = document.createElement('div');
+                chapterDiv.className = 'chapter-fields mb-4';
+
+                // Header du chapitre avec numéro et bouton de suppression
+                const header = document.createElement('div');
+                header.className = 'chapter-header d-flex justify-content-between align-items-center mb-2';
+                header.innerHTML = `
+                    <h4>Chapitre ${index + 1}</h4>
+                    <button type="button" class="btn btn-danger btn-sm delete-chapter">
+                        Supprimer
+                    </button>
+                `;
+
+                // Titre du chapitre
+                const titleInput = document.createElement('input');
+                titleInput.type = 'text';
+                titleInput.name = `form[chaptersTitles][${index}]`;
+                titleInput.className = 'form-control mb-2';
+                titleInput.placeholder = 'Titre du chapitre';
+
+                // Contenu du chapitre
+                const contentTextarea = document.createElement('textarea');
+                contentTextarea.name = `form[chaptersContent][${index}]`;
+                contentTextarea.className = 'form-control';
+                contentTextarea.placeholder = 'Contenu du chapitre';
+                contentTextarea.rows = 5;
+
+                chapterDiv.appendChild(header);
+                chapterDiv.appendChild(titleInput);
+                chapterDiv.appendChild(contentTextarea);
+
+                // Gestionnaire d'événement pour la suppression
+                const deleteButton = chapterDiv.querySelector('.delete-chapter');
+                deleteButton.addEventListener('click', function() {
+                    chapterDiv.remove();
+                    updateChapterNumbers();
+                });
+
+                return chapterDiv;
+            }
+
+            function updateChapterNumbers() {
+                const chapters = document.querySelectorAll('.chapter-fields');
+                chapters.forEach((chapter, idx) => {
+                    chapter.querySelector('h4').textContent = `Chapitre ${idx + 1}`;
+                });
+            }
+
+            addButton.addEventListener('click', function() {
+                chaptersContainer.appendChild(createChapterFields());
+                index++;
+            });
+        });
+    </script>
+{% endblock %}
+{% block content %}
+    <main>
+        <h2 class="clip">Créer un article</h2>
+        <form action="{{ path('default_articles') }}" method="post">
+                {{ form_row(form.title) }}
+                {{ form_row(form.image) }}
+                {{ form_row(form.alt) }}
+                {{ form_row(form.category) }}
+                <div>
+                    <label for="content">Introduction du tutoriel</label>
+                    <trix-editor>
+                        {{ form_row(form.intro) }}
+                    </trix-editor>
+                </div>
+                <div>
+                    <label for="content">Contenu général</label>
+                    <trix-editor>
+                        {{ form_row(form.content) }}
+                    </trix-editor>
+                </div>
+                <div class="chapters-container">
+                    <h3>Chapitres</h3>
+                    <div id="chapters-list">
+                        {# Ajout dynamique de chapitres #}
+                    </div>
+
+                    <button type="button" id="add-chapter" class="btn btn-primary mt-3">
+                        Ajouter un chapitre
+                    </button>
+                </div>
+            <button type="submit">Envoyer</button>
+        </form>
+    </main>
+{% endblock %}

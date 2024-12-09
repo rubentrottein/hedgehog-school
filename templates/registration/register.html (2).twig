@@ -1,0 +1,24 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Register{% endblock %}
+{% block final_stylesheets %}
+    <link rel="stylesheet" href="{{ asset("assets/styles/form.css") }}">
+{% endblock %}
+
+{% block content %}
+
+        <h1>Register</h1>
+        <article class="form-container">
+            {{ form_errors(form) }}
+
+            {{ form_start(form) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.plainPassword, {
+                    label: 'Password'
+                }) }}
+                {{ form_row(form.agreeTerms) }}
+
+                <button type="submit" class="btn">Register</button>
+            {{ form_end(form) }}
+        </article>
+{% endblock %}

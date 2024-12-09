@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hedgehog School{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{asset('assets/styles/app.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/styles/home.css')}}">
+{% endblock %}
+{% block final_javascripts %}
+    <script src="{{ asset('assets/scripts/bgVideoChanger.js') }}" defer></script>
+{% endblock %}
+{% block bgvideo %}
+    <video autoplay muted loop>
+        <source src="{{ asset('media/1399970531860.webm') }}" type="video/webm">
+        <source src="{{ asset('media/bg.webm') }}" type="video/webm">
+        Votre navigateur ne supporte pas les vidéos HTML5.
+    </video>
+{% endblock %}
+{% block banner %}{% endblock %}
+{% block content %}
+    <section id="hero">
+        <article>
+            <p class="edu-font">Apprendre</p>
+            <p class="edu-font">Savoir</p>
+            <p class="edu-font">Transmettre</p>
+        </article>
+        <article class="buttons">
+            <a type="button" href="{{ path('app_register') }}">S'inscrire</a>
+            <a type="button" href="{{ path('app_login') }}">Se connecter</a>
+        </article>
+        <a href="#slider">Chercher un cours</a>
+    </section>
+    <main>
+        <section class="accordion">
+            <h2 class="trigger">Nos derniers cours</h2>
+            <form action="{{ path('default_articles') }}">
+                <input type="search" name="" id="search" placeholder="Chercher un cours">
+                <input type="submit" value="Chercher">
+            </form>
+            <aside id="slider">
+                {% for article in articlesList %}{# articlesList|slice(0,3) #}
+                    {% if(loop.index >= listLength) %}
+                    <a href="#1" id="{{ loop.index }}" >
+                        <img src="{{ article.image }}" alt="{{ article.title }}">
+                        <h4>{{ article.title }}</h4>
+                        {# <p>{{ article.intro|raw }}</p> #}
+                    </a>
+                    {% else %}
+                    <a href="#{{ loop.index+1 }}">
+                        <img id='{{ loop.index }}' src="{{ article.image }}" alt="{{ article.title }}">
+                        <h4>{{ article.title }}</h4>
+                        <p>{{ article.intro|raw }}</p>
+                    </a>
+                    {% endif %}
+                {% endfor %}
+            </aside>
+            <article class="content">
+            </article>
+        </section>
+    </main>
+{% endblock %}

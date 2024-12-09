@@ -1,0 +1,27 @@
+<header>
+    <a href="/"><h1 class="edu-font">Hedgehog School</h1></a>
+    <nav>
+        <a href="{{ path('default_home') }}">Home</a>
+        <a href="{{ path('default_articles') }}">Articles</a>
+        <a href="{{ path('user_profile') }}">Profil</a>
+        <a href="{{ path('default_test') }}">Test</a>
+    </nav>
+    <div class="btn-container">
+        <b aria-hidden="true">🌞</b>
+        <label class="switch btn-color-mode-switch">
+            <input type="checkbox" name="color_mode" id="color_mode" value="1" class="darkModeToggle">
+            <label for="color_mode" data-on="Dark" data-off="Light" class="btn-color-mode-switch-inner"></label>
+        </label>
+        <b aria-hidden="true">🌙</b>
+    </div>
+    {% if not app.user %}
+    <div>
+        <a type="button" class="button connexion" href="{{ path('app_login')}}">Connexion</a>
+        <a type="button" class="button register" href="{{ path('app_register')}}">Inscription</a>
+    </div>
+    {% else %}
+        <p>Bienvenue {{ app.user.username }}</p>
+        <a type="button" href="{{ path('app_logout') }}">Déconnexion</a>
+    {% endif %}
+    <div class="scroll-bar"></div>
+</header>
