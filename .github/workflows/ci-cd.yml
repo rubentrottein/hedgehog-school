@@ -12,7 +12,7 @@ jobs:
     
     - name: Prepare Symfony
       run: |
-        composer install --no-dev --optimize-autoloader
+        composer install --no-dev --optimize-autoloader --ignore-platform-reqs
         php bin/console cache:clear
     
     - name: Deploy via FTP
