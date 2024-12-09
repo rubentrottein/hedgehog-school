@@ -9,7 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - name: Check PHP Version
+      run: php -v
     
+    - name: List Composer Dependencies
+      run: composer show,
+
     - name: Prepare Symfony
       run: |
         composer self-update
