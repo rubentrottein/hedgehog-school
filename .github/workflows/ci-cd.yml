@@ -13,7 +13,7 @@ jobs:
       run: php -v
     
     - name: List Composer Dependencies
-      run: composer show,
+      run: composer show
 
     - name: Prepare Symfony
       run: |
