@@ -1,0 +1,32 @@
+name: CI/CD Hedgehog School Symfony
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Prepare Symfony
+      run: |
+        composer install --no-dev --optimize-autoloader
+        php bin/console cache:clear
+    
+    - name: Deploy via FTP
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ${{ secrets.OVH_FTP_SERVER }}
+        username: ${{ secrets.OVH_FTP_USER }}
+        password: ${{ secrets.OVH_FTP_PASSWORD }}
+        local-dir: ./
+        server-dir: /dan/
+        exclude: |
+          **/.git*
+          **/.git*/**
+          **/node_modules/**
+          **/var/cache/**
+          **/var/log/**
+          .env
