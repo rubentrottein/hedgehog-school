@@ -1,4 +1,4 @@
-name: CI/CD Hedgehog School Symfony
+name: CI/CD Hedgehog School Symfony to OVH FTP
 
 on:
   push:
@@ -13,7 +13,7 @@ jobs:
     - name: Prepare Symfony
       run: |
         composer install --no-dev --optimize-autoloader --ignore-platform-reqs
-        php bin/console cache:clear
+        php bin/console cache:clear --env=prod
     
     - name: Deploy via FTP
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
