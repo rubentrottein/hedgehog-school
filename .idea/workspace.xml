@@ -295,6 +295,9 @@
       <path value="$PROJECT_DIR$/vendor/sebastian/object-reflector" />
     </include_path>
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 4
@@ -355,7 +358,8 @@
       <workItem from="1731400815309" duration="38128000" />
       <workItem from="1731989654402" duration="1288000" />
       <workItem from="1733140897802" duration="11712000" />
-      <workItem from="1733758162585" duration="10002000" />
+      <workItem from="1733758162585" duration="14214000" />
+      <workItem from="1733827409466" duration="7609000" />
     </task>
     <servers />
   </component>

@@ -46,9 +46,17 @@ section{
     border: deepskyblue 1px solid;
 }
 body{
-    background: #0b0e03;
+    background: url("https://mistertea.fr/selene/img/abstract/2.jpg")center/cover;
 }
-@media screen and (min-width: 800px){
+header, footer{
+    position: static;
+    width: 100dvw;
+}
+header, nav{
+    flex-direction: column;
+}
+/*
+@media screen and (max-width: 800px){
     *{
         width: 100%;
         margin: auto;
@@ -78,3 +86,4 @@ body{
         width: 100%;
     }
 }
+/**/

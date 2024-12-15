@@ -105,36 +105,57 @@ class ArticleController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $articleData = $form->getData();
-            // Ajouter les dates actuelles
-            $currentDateTime = new \DateTimeImmutable();
-            $articleData['createdAt'] = $currentDateTime->format('Y-m-d H:i:s');
-            $articleData['updatedAt'] = $currentDateTime->format('Y-m-d H:i:s');
-
-            // Ajouter l'auteur (utilisateur connecté)
+            dd($articleData);
             // Récupérer l'utilisateur connecté
             $user = $this->getUser();
 
             // Vérifier que l'utilisateur n'est pas null
-            if ($user !== null) {
-                $articleData['author'] = $user->getUsername();
-            } else {
-                // Gérer le cas où l'utilisateur n'est pas connecté
+            if ($user === null) {
                 $this->addFlash('error', 'Vous devez être connecté pour créer un article.');
                 return $this->redirectToRoute('app_login');
             }
 
-            $response = $this->httpClient->request('POST', 'http://localhost:3999/api/school/articles/add', [
-                'json' => $articleData,
-            ]);
+            // Préparer les données pour l'API
+            $currentDateTime = new \DateTimeImmutable();
+            $apiData = [
+                'title' => $articleData->getTitle(),
+                'image' => $articleData->getImage(),
+                'alt' => $articleData->getAlt(),
+                'category' => $articleData->getCategory(),
+                'author' => $user->getUsername(),
+                'createdAt' => $currentDateTime->format('c'),
+                'updatedAt' => $currentDateTime->format('c'),
+                'chaptersTitles' => $form->get('chaptersTitles')->getData(),
+                'chaptersContent' => $form->get('chaptersContent')->getData(),
+                'chapters' => count($form->get('chaptersTitles')->getData()),
+                'intro' => $articleData->getIntro(), // Ajoutez un champ intro si nécessaire
+                'content' => $articleData->getContent(),  // Ajoutez un contenu si nécessaire
+            ];
 
-            if ($response->getStatusCode() === 201) {
-                $this->addFlash('success', 'Article créé avec succès');
-                return $this->redirectToRoute('article_get_one', ['id' => $articleData->getId()]);
-            } else {
-                $this->addFlash('error', 'Erreur lors de la création de l\'article');
+            try {
+                dd($apiData);
+                $response = $this->httpClient->request('POST', 'https://school-api-omega.vercel.app/api/school/articles/add', [
+                    'json' => $apiData,
+                ]);
+
+                // Vérifier le statut de la réponse
+                $statusCode = $response->getStatusCode();
+
+                if ($statusCode === 201) {
+                    $this->addFlash('success', 'Article créé avec succès');
+                    return $this->redirectToRoute('article_get_one', ['id' => $response->toArray()['id']]);
+                } else {
+                    // Si la réponse n'est pas un succès
+                    $responseContent = $response->getContent(false); // false pour éviter une exception
+                    $this->addFlash('error', 'Erreur lors de la création de l\'article. Code: ' . $statusCode . '. Détails: ' . $responseContent);
+                }
+            } catch (\Exception $e) {
+                // Gestion des erreurs de requête
+                $this->addFlash('error', 'Erreur de communication avec l\'API : ' . $e->getMessage());
             }
         }
 
+        // En cas d'échec, rester sur le formulaire de création
         return $this->render('article/createArticle.html.twig', [
             'form' => $form->createView(),
         ]);

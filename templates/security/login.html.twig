@@ -6,7 +6,7 @@
 {% endblock %}
 {% block content %}
 <section class="form-container">
-
+{#
     <form method="post" action="{{ path('app_login') }}">
 
         {% if app.user %}
@@ -28,7 +28,7 @@
         {#
             Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
             See https://symfony.com/doc/current/security/remember_me.html
-        #}
+        #
 
         <div class="checkbox mb-3">
             <input type="checkbox" class="checkbox" name="_remember_me" id="_remember_me">
@@ -40,7 +40,7 @@
         </button>
     </form>
 
-
+    #}
     {# form from git --dev #}
         <form method="post" action="{{ path('app_login') }}">
             {% if error %}

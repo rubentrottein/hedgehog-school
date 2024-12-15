@@ -21,7 +21,7 @@ class ArticleApiService
 
     public function fetchArticles(): array
     {
-        $response = $this->httpClient->request('GET', 'http://localhost:3999/api/school/articles');
+        $response = $this->httpClient->request('GET', 'https://school-api-omega.vercel.app/api/school/articles');
 
         if ($response->getStatusCode() !== 200) {
             throw new \Exception('Error fetching articles from API');
