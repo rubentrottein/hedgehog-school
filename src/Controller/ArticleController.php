@@ -105,7 +105,6 @@ class ArticleController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $articleData = $form->getData();
-            dd($articleData);
             // Récupérer l'utilisateur connecté
             $user = $this->getUser();
 
@@ -133,7 +132,6 @@ class ArticleController extends AbstractController
             ];
 
             try {
-                dd($apiData);
                 $response = $this->httpClient->request('POST', 'https://school-api-omega.vercel.app/api/school/articles/add', [
                     'json' => $apiData,
                 ]);

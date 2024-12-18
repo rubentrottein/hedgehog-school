@@ -45,6 +45,7 @@ section{
     color: var(--white);
     border: deepskyblue 1px solid;
 }
+/*
 body{
     background: url("https://mistertea.fr/selene/img/abstract/2.jpg")center/cover;
 }

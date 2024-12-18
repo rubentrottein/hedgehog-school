@@ -1,12 +1,11 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
 {% block title %}Hedgehog School{% endblock %}
 {% block stylesheets %}
+    {#
+    #}
     <link rel="stylesheet" href="{{asset('assets/styles/app.css')}}">
     <link rel="stylesheet" href="{{asset('assets/styles/home.css')}}">
-{% endblock %}
-{% block final_javascripts %}
-    <script src="{{ asset('assets/scripts/bgVideoChanger.js') }}" defer></script>
 {% endblock %}
 {% block bgvideo %}
     <video autoplay muted loop>
@@ -15,7 +14,9 @@
         Votre navigateur ne supporte pas les vidéos HTML5.
     </video>
 {% endblock %}
+{#
 {% block banner %}{% endblock %}
+#}
 {% block content %}
     <section id="hero">
         <article>

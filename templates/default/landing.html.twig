@@ -1,0 +1,152 @@
+{% extends "base.html.twig" %}
+{% block final_stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/styles/landing.css') }}">
+{% endblock %}
+{% block content %}
+    <body>
+    <header>
+        <h1>🦔 Hedgehog School 🦔</h1>
+        <nav>
+            <a href="Index.html">Accueil</a>
+            <a href="index_alt.html">alternative</a>
+            <a href="#index_c.html">Profil</a>
+            <a href="#login" class="btn">Connexion</a>
+            <a href="#signup" class="btn">Inscription</a>
+        </nav>
+    </header>
+    <video src="media/1.webm" autoplay muted loop></video>
+    <section id="hero">
+        <h1>Bienvenue sur HedgehogSchool</h1>
+        <article>
+            <p>Apprendre</p>
+            <p>Savoir</p>
+            <p>Transmettre</p>
+        </article>
+        <button>S'inscrire</button>
+        <a href="#search">Chercher un cours</a>
+    </section>
+    <main>
+        <section>
+            <h2>Nos derniers cours</h2>
+            <article>
+                <h3>Slider</h3>
+                <aside id="slider">
+                    <a href="#2">
+                        <figure>
+                            <img id='1' src="https://picsum.photos/id/18/1980/1280" alt="Image d'illustration">
+                            <figcaption>
+                                <h4>Titre du cours</h4>
+                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa ex, obcaecati saepe consectetur, illo dolorem iste numquam doloremque maiores beatae pariatur voluptatem libero consequuntur inventore.</p>
+                            </figcaption>
+                        </figure>
+                    </a>
+                    <a href="#3">
+                        <figure>
+                            <img id='2' src="https://picsum.photos/id/111/1980/1280" alt="Image d'illustration">
+                            <figcaption>
+                                <h4>Titre du cours</h4>
+                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa ex, obcaecati saepe consectetur, illo dolorem iste numquam doloremque maiores beatae pariatur voluptatem libero consequuntur inventore.</p>
+                            </figcaption>
+                        </figure>
+                    </a>
+                    <a href="#4">
+                        <figure>
+                            <img id='3' src="https://picsum.photos/id/213/1980/1280" alt="Image d'illustration">
+                            <figcaption>
+                                <h4>Titre du cours</h4>
+                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa ex, obcaecati saepe consectetur, illo dolorem iste numquam doloremque maiores beatae pariatur voluptatem libero consequuntur inventore.</p>
+                            </figcaption>
+                        </figure>
+                    </a>
+                    <a href="#1">
+                        <figure>
+                            <img id='4' src="https://picsum.photos/id/33/1980/1280" alt="Image d'illustration">
+                            <figcaption>
+                                <h4>Titre du cours</h4>
+                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa ex, obcaecati saepe consectetur, illo dolorem iste numquam doloremque maiores beatae pariatur voluptatem libero consequuntur inventore.</p>
+                            </figcaption>
+                        </figure>
+                    </a>
+                </aside>
+            </article>
+        </section>
+        <section id="about">
+            <h2>À propos</h2>
+            <p>Hedgehog School est une plateforme gratuite où la communauté partage et évalue des tutoriels pour permettre à chacun d'apprendre à son rythme. Rejoignez-nous pour transmettre vos connaissances et en acquérir de nouvelles.</p>
+        </section>
+        <section id="features">
+            <h2>Pourquoi Hedgehog School ?</h2>
+            <ul>
+                <li>📚 Partagez vos tutoriels et aidez la communauté à apprendre.</li>
+                <li>🌟 Notez et commentez les cours pour garantir leur qualité.</li>
+                <li>🎓 Accédez à des ressources gratuites et variées.</li>
+            </ul>
+        </section>
+        <section id="testimonials">
+            <h2>Ce que disent nos utilisateurs</h2>
+            <article class="testimonies">
+                <blockquote>
+                    <p>"Hedgehog School m'a permis de développer mes compétences en programmation rapidement. Une plateforme incroyable !" - Alice</p>
+                </blockquote>
+                <blockquote>
+                    <p>"Une communauté bienveillante et des tutoriels de qualité, je recommande !" - Bob</p>
+                </blockquote>
+            </article>
+        </section>
+        <section id="contact">
+            <h2>Contactez-nous</h2>
+            <form>
+                <label for="name">Nom :</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email :</label>
+                <input type="email" id="email" name="email" required>
+                <label for="message">Message :</label>
+                <textarea id="message" name="message" required></textarea>
+                <button type="submit">Envoyer</button>
+            </form>
+        </section>
+        <section id="stats">
+            <h2>En chiffres</h2>
+            <ul>
+                <li>👨‍🎓 <span id="usersCount">1234</span> utilisateurs</li>
+                <li>📘 <span id="coursesCount">456</span> tutoriels disponibles</li>
+                <li>🌟 <span id="reviewsCount">789</span> avis publiés</li>
+            </ul>
+        </section>
+    </main>
+    <section class="modal">
+        <article id="modalContent">
+            <a href="#" class="connexion close">X</a>
+            <h2>Connexion</h2>
+            <form action="">
+                <label for="email">email
+                    <input type="text" name="email">
+                </label>
+                <label for="password">password
+                    <input type="password" name="password">
+                </label>
+                <input type="submit" value="Connexion">
+                <a href="#" id="registerLink">Pas encore inscrit? s'inscrire ici</a>
+            </form>
+        </article>
+    </section>
+    <script>
+        for(let displayButton of document.querySelectorAll(".connexion")){
+            displayButton.addEventListener("click", ()=>{
+                document.querySelector(".modal").classList.toggle("visible");
+            })
+        }
+
+        document.querySelector("h1").addEventListener("click", changeVid);
+        document.querySelector("#profile").addEventListener("click", ()=> document.querySelector("video").autoplay = true);
+        let i=2
+        function changeVid(){
+
+            document.querySelector("video").pause();
+            if(i>9) {i=0}
+            document.querySelector("video").src = i + ".webm";
+
+            i++;
+        }
+    </script>
+{% endblock %}

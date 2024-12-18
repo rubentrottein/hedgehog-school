@@ -39,7 +39,7 @@ class ArticleApiService
      */
     public function fetchArticleById(string $id): array
     {
-        $response = $this->httpClient->request('GET', 'http://localhost:3999/api/school/article/'.$id);
+        $response = $this->httpClient->request('GET', 'https://school-api-omega.vercel.app/api/school/article/'.$id);
         if ($response->getStatusCode() !== 200) {
             throw new \Exception('Error fetching article from API');
         }
