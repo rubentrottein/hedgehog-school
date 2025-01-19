@@ -1,9 +1,12 @@
 {% extends "layout.html.twig" %}
-
+{% block final_stylesheets %}
+    <style>/* body{ background:url({{ asset('assets/hedgehog.jpg') }})fixed no-repeat;} */</style>
+    <link rel="stylesheet" href="{{ asset('assets/styles/course.css') }}">
+{% endblock %}
 {% block content %}
 <section id="articleHeader">
     <div>
-        <video src="https://mistertea.fr/selene/video/placeholder.mp4" poster="https://picsum.photos/id/32/400/200"></video>
+        <video src="{{ asset("media/bg.mp4") }}" poster="{{ article.image }}"></video>
         <article>
             <h3>Video title</h3>
             <p>Description de la vidéo</p>
@@ -18,30 +21,47 @@
     </div>
     <div>
         <nav id="tabs">
-            <div class="rounded-tab left active">CSS left tab</div>
-            <div class="rounded-tab">CSS round tab</div>
-            <div class="rounded-tab right">CSS right tab</div>
+            {% if article.chaptersTitles|length > 0 %}
+                <a href="#" class="rounded-tab left active">{{ article.chaptersTitles[0] }}</a>
+                {% if article.chaptersTitles[1] %}
+                    <a href="#" class="rounded-tab">{{ article.chaptersTitles[1] }} </a>
+                {% elseif lastChapterTitle %}
+                    <a href="#" class="rounded-tab right">{{ lastChapterTitle }}</a>
+                {% else %}
+                    <a href="#" class="rounded-tab right">Fin du cours</a>
+                {% endif %}
+            {% endif %}
         </nav>
-        <article>
-            <h2>Titre du chapitre</h2>
+        <article class="chapter-header">
+            {% if article.chaptersTitles|length > 0 %}
+                <h2>{{ article.chaptersTitles[0] }}</h2>
+            {% else %}
+                <h2>{{ article.title }}</h2>
+                <i>Chapitre unique</i>
+            {% endif %}
             <aside>
                 <i class="date">17/06/2024</i>
-                <p>notes</p>
+                <div class="tags">
+                    <mark>tags</mark>
+                </div>
             </aside>
         </article>
-        <p>Texte de l'introduction</p>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste repellat dolorem perferendis numquam itaque nihil facere fugiat eveniet dicta modi?</p>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste repellat dolorem perferendis numquam itaque nihil facere fugiat eveniet dicta modi?</p>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste repellat dolorem perferendis numquam itaque nihil facere fugiat eveniet dicta modi?</p>
+        <p>{{ article.intro | raw }}</p>
     </div>
 </section>
 <section id="chapterContent">
-    <h2>Tab navigation</h2>
+    {% if article.chaptersTitles|length > 0 %}
+        <h2>{{ article.chaptersTitles[0] }}</h2>
+    {% else %}
+        <h2>{{ article.title }}</h2>
+        <i>Chapitre unique</i>
+    {% endif %}
     <article>
-
+        {{ article.content | raw }}
     </article>
 </section>
 <section id="comments">
+    <h2>Commentaires et avis</h2>
     <article class="comment">
         <h4>Titre commentaire</h4>
         <div>

@@ -1,0 +1,46 @@
+name: Deploy to OVH FTP
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up PHP 8.2
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        extensions: mbstring, ctype, iconv  # Ajoute les extensions nécessaires ici
+
+    - name: Check PHP Version
+      run: php -v
+
+    - name: List Composer Dependencies
+      run: composer show
+
+    - name: Prepare Symfony
+      run: |
+        composer self-update
+        composer clear-cache
+        composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --no-scripts --ignore-platform-reqs
+        php bin/console cache:clear --env=prod
+
+    - name: Deploy via FTP
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ${{ secrets.OVH_FTP_SERVER }}
+        username: ${{ secrets.OVH_FTP_USER }}
+        password: ${{ secrets.OVH_FTP_PASSWORD }}
+        local-dir: ./
+        server-dir: /dan/
+        exclude: |
+          **/.git*
+          **/.git*/**
+          **/node_modules/**
+          **/var/cache/**
+          **/var/log/**
+          .env

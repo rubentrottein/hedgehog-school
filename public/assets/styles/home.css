@@ -1,0 +1,122 @@
+*{
+    scroll-behavior: smooth;
+}
+:root{
+    --pure-glass : radial-gradient(rgba(255,255,255,.1), lightsteelblue);
+}
+
+.edu-font {
+    font-family: "Edu AU VIC WA NT Pre", "Montserrat";
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+video{
+    z-index: -1;
+    position: absolute;
+    top:0;
+    left:0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+h1{
+    font-weight: 100;
+    color: seagreen;
+}
+nav{
+    width: 25dvw;
+    display: flex;
+    justify-content: space-around;
+}
+nav a{
+    text-decoration: none;
+    color: gold;
+    font-family: monospace;
+}
+/************ Call To action ***********/
+#hero{
+    position: absolute;
+    inset:25%;
+    width: 50dvw;
+    height: 50dvh;
+    background: var(--pure-glass);
+    color: var(--black);
+    backdrop-filter: blur(10px);
+    padding: 1.5em;
+    display: grid;
+    place-items: center;
+    border-radius: 1em;
+    border: white solid 1px;
+}
+#hero p{
+    font-size: 3em;
+    transform: translateX(-100dvw);
+    animation: fadeIn 1s 1s forwards ease;
+    color: var(--white);
+}
+#hero p:nth-child(2){margin-left: 4em; animation: fadeIn 1s 2s forwards ease; color: var(--beige);}
+#hero p:nth-child(3){margin-left: 6em; animation: fadeIn 1s 3s forwards ease; color: var(--transparent-white);}
+#hero .buttons{
+    display: flex;
+    gap: 1em;
+}
+#hero button, #hero [type=button]{
+    border-radius: .5em;
+    padding: 1em;
+    color: var(--white);
+    border: 1px solid var(--white);
+}
+@keyframes fadeIn{
+    from{
+        transform: translateX(-100dvw);
+    } to {
+        transform: translateX(0);
+    }
+}
+
+/************ Layout Vitrine ***********/
+main{
+    overflow-x: hidden;
+    margin-top: 95dvh;
+    background: rgba(0,0,0,.5);
+    border-radius: 1em;
+    color: white;
+    backdrop-filter: blur(15px);
+    opacity: .8;
+}
+
+/****** Slider de cours suggérés *******/
+
+.accordion #slider{
+    display: flex;
+    width: 320dvw;
+    height: 60dvh;
+}
+#slider img{
+    object-fit: contain;
+    max-height: 50vh;
+    width: 80dvw;
+    margin: auto;
+}
+#slider a{
+    color:var(--white);
+    width: 90%;
+}
+
+/* accordion *
+.accordion{
+    overflow: hidden;
+    display: grid;
+    padding: 1.5em;
+    cursor:pointer;
+    transition: 160ms ease;
+}
+.accordion .hidden{
+    overflow: hidden;
+    height: 1em;
+}
+.open{
+    display: grid;
+    grid-template-rows: 1.5em 1fr;
+}

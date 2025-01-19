@@ -42,7 +42,7 @@ class LoginControllerTest extends WebTestCase
         $this->client->request('GET', '/login');
         self::assertResponseIsSuccessful();
 
-        $this->client->submitForm('Sign in', [
+        $this->client->submitForm('connexion', [
             '_username' => 'doesNotExist@example.com',
             '_password' => 'password',
         ]);

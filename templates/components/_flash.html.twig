@@ -1,0 +1,22 @@
+{% if app.flashes('success') is not empty %}
+    <div class="flash success">
+        {% for message in app.flashes('success') %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% if app.flashes('error') is not empty %}
+    <div class="flash error">
+        {% for message in app.flashes('error') %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+{#
+{% if app.request.method == 'POST' and not form.vars.valid %}
+<div class="flash error">
+    Une erreur s'est produite lors de la soumission du formulaire.
+</div>
+{% endif %}
+#}

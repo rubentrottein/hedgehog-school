@@ -1,0 +1,89 @@
+img{
+    max-width: 100%;
+}
+video{
+    max-width: 100%;
+}
+video:before{
+    content:"▶";
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%);
+    font-size: 3em;
+    opacity: .7;
+}
+main{
+    position: relative;
+    top: -10em;
+}
+section{
+    background: var(--transparent-white);
+    backdrop-filter: blur(5px);
+}
+#chapterContent{
+    margin: 3em auto;
+    padding: 2em;
+    border-radius: 1em;
+    backdrop-filter: blur(15px);
+    border: 1px solid white;
+    box-shadow: 0 0 6px #00000029;
+}
+#chapterContent h2{
+    margin: 1em 0;
+}
+.chapter-header{
+    flex-direction: column;
+}
+.chapter-header>*{
+    margin-bottom: 1em;
+}
+#comments{
+    padding: 2em;
+    width: 95%;
+    background: var(--transparent-black);
+    color: var(--white);
+    border: deepskyblue 1px solid;
+}
+body{
+    background: url("https://mistertea.fr/selene/img/abstract/2.jpg")center/cover;
+}
+header, footer{
+    position: static;
+    width: 100dvw;
+}
+header, nav{
+    flex-direction: column;
+}
+/*
+@media screen and (max-width: 800px){
+    *{
+        width: 100%;
+        margin: auto;
+    }
+    #articleHeader{
+        flex-direction: column;
+    }
+    body{
+        background: white;
+        background: url("https://mistertea.fr/selene/img/abstract/2.jpg")center/cover;
+    }
+    main{
+        margin-top: 5em;
+    }
+    header>a{
+        display: none;
+    }
+    header{
+        height: 1.5em;
+        font-size: 2em;
+        justify-content: space-between;
+    }
+    #tabs{
+        position: fixed;
+        top: 0;
+        left:0;
+        width: 100%;
+    }
+}
+/**/

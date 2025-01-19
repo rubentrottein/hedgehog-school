@@ -2,33 +2,31 @@
 
 {% block stylesheets %}
 {#  -- Ici les feuilles de styles de mon thème --   #}
-    <link rel="stylesheet" href="{{ asset('styles/app.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/styles/app.css') }}" />
 {% endblock %}
 
 {% block javascripts %}
-{#  -- Ici les scripts de mon thème --   #}
-<script src="{{ asset('assets/app.js') }}"></script>
 {% endblock %}
-
+{% block final_stylesheets %}{% endblock %}
 {% block body %}
+    <!-- header-area -->
+    {% include 'components/header.html.twig' %}
+    {% block banner %}<img class="banner" src="https://picsum.photos/1980/300" alt="Bannière d'illustration"/> {% endblock %}
+    <!-- header-area-end -->
 
-<!-- header-area -->
-{% include 'components/header.html.twig' %}
-    <img class="banner" src="https://picsum.photos/1980/300" alt="Bannière d'illustration"/>
-<!-- header-area-end -->
-
-
-<!-- main-area -->
-<main>
-    {# TODO : messages Flash
+    <!-- main-area -->
+    <main>
         {% include 'components/_flash.html.twig' %}
-    #}
-    {% block content %}{% endblock %}
-</main>
-<!-- main-area-end -->
+        {% block content %}{% endblock %}
+    </main>
+    <!-- main-area-end -->
 
-<!-- footer-area -->
-{% include 'components/footer.html.twig' %}
-<!-- footer-area-end -->
+    <!-- footer-area -->
+    {% include 'components/footer.html.twig' %}
+    <!-- footer-area-end -->
 
+    {% block final_javascripts %}
+        {#  -- Ici les scripts de mon thème --   #}
+        <script src="{{ asset('assets/scripts/readingProgression.js') }}"></script>
+    {% endblock %}
 {% endblock %}

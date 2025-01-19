@@ -1,0 +1,19 @@
+.articles img{
+    width:5vw;
+    border-radius: .5em 0 0 .5em;
+}
+.articles li{
+}
+.articles figure{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--transparent-black);
+    border-radius: .5em;
+    margin-top: 1em;
+}
+
+.articles h4{
+    padding: 1em;
+    color: var(--white);
+}

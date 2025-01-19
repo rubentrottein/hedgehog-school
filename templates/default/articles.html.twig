@@ -1,26 +1,31 @@
 {% extends "layout.html.twig" %}
-
+{% block final_stylesheets %}
+        <link rel="stylesheet" href="{{ asset('assets/styles/list.css') }}"
+{% endblock %}
 {% block content %}
         <section id="home">
                 <h2 class="text-secondary text-center">Liste des Articles</h2>
+
         </section>
         <section id="chapterContent">
-                <h2>Tab navigation</h2>
                 {% if not app.user %}
                         <p>Connectez vous pour accéder aux articles</p>
                         <div>
-                                <a href="/login" type="button">Connexion</a>
-                                <a href="/register" type="button">Inscription</a>
+                                <a href="{{ path('app_login') }}" type="button">Connexion</a>
+                                <a href="{{ path('app_register') }}" type="button">Inscription</a>
                         </div>
                 {% else %}
-                        <ul>
-                                {% for article in articles %}
+                        <ul class="articles">
+                        {% for article in articles %}
+                                <a href="{{ path('article_get_one', {id:article._id}) }}">
                                         <figure>
                                                 <img src="{{ article.image }}" alt="Illustration" />
                                                 <h4> {{ article.title }} </h4>
                                         </figure>
-                                {% endfor %}
+                                </a>
+                        {% endfor %}
                         </ul>
                 {% endif %}
         </section>
+        <a href="{{ path('article_create') }}" type="button" class="newItem">➕ Nouvel article</a>
 {% endblock %}

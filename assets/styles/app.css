@@ -166,3 +166,8 @@ button:active, [type=button]:active {
     100% {opacity: 1;}
 }
 
+/* Themes */
+.darkMode{
+    background: var(--black);
+    color: var(--white);
+}
