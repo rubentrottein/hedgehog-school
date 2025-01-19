@@ -28,3 +28,4 @@
 ### everything npm/composer ###
 **/node_modules
 **/vendor
+/.idea
